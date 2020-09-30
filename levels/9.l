@@ -2,4 +2,4 @@
 Player
 1 1
 Door
-10 10
+1 2
