@@ -1,6 +1,6 @@
 package mySokoban;
 
-public abstract class Box {
+public abstract class Box extends Thread {
 	static final int numFloor=-1;
 	static final int numPlayer=0;
 	static final int numDoor=1;

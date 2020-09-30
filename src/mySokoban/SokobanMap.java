@@ -45,44 +45,51 @@ public class SokobanMap {
 	
 	protected void moveBox(int x,int y,char dir) {
 		Box box=getBoxAt(x, y);
+		//BoxPanel bp=new BoxPanel(box);
 		switch(dir) {
-		case 'u':
-			box.y=box.y-1;
-			myMap.put(location(x, y),null);
-			myMap.put(location(x, y-1),box);
-			break;
-		case 'd':
-			box.y=box.y+1;
-			myMap.put(location(x, y),null);
-			myMap.put(location(x, y+1),box);
-			break;
-		case 'l':
-			box.x=box.x-1;
-			myMap.put(location(x, y),null);
-			myMap.put(location(x-1, y),box);
-			break;
-		case 'r':
-			box.x=box.x+1;
-			myMap.put(location(x, y),null);
-			myMap.put(location(x+1, y),box);
-			break;
+			case 'u':
+				box.y=box.y-1;
+				myMap.put(location(x, y),null);
+				myMap.put(location(x, y-1),box);
+				break;
+			case 'd':
+				box.y=box.y+1;
+				myMap.put(location(x, y),null);
+				myMap.put(location(x, y+1),box);
+				break;
+			case 'l':
+				box.x=box.x-1;
+				myMap.put(location(x, y),null);
+				myMap.put(location(x-1, y),box);
+				break;
+			case 'r':
+				box.x=box.x+1;
+				myMap.put(location(x, y),null);
+				myMap.put(location(x+1, y),box);
+				break;
 		}
+		//Thread thread=new Thread(bp);
+		//thread.start();
 	}
 	
-	protected void movePlayer(char dir) {switch(dir) {
-		case 'u':
-			player.y=player.y-1;
-			break;
-		case 'd':
-			player.y=player.y+1;
-			break;
-		case 'l':
-			player.x=player.x-1;
-			break;
-		case 'r':
-			player.x=player.x+1;
-			break;
-		}		
+	protected void movePlayer(char dir) {
+		//BoxPanel bp=new BoxPanel(player);
+		switch(dir) {
+			case 'u':
+				player.y=player.y-1;
+				break;
+			case 'd':
+				player.y=player.y+1;
+				break;
+			case 'l':
+				player.x=player.x-1;
+				break;
+			case 'r':
+				player.x=player.x+1;
+				break;
+		}
+		//Thread thread=new Thread(bp);
+		//thread.start();
 	}
 	
 	protected void removeBox(int x,int y) {

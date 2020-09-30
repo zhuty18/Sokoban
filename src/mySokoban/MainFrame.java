@@ -1,22 +1,34 @@
 package mySokoban;
 
+import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.HashMap;
 
 import javax.swing.*;
 
-public class MainFrame extends JFrame {
+import sun.security.action.PutAllAction;
+
+public class MainFrame extends JFrame implements KeyListener{
 	SokobanMap myMap;
+	MyPanel mPanel;
 	JMenuBar menubar;
 	JMenu menu1,menu2,menu3,menu4;
 	JMenuItem item1,item2,item3,item4,item5;
 	
 	MainFrame(String s){
+		super();
 		myMap=new SokobanMap();
+		mPanel=new MyPanel(myMap);
+		Container con=getContentPane();
+		this.add(mPanel);
+		this.addKeyListener(this);
 		setTitle(s);
-		setSize(400,300);
+		setSize(myMap.width*BoxPanel.WIDTH+30,myMap.height*BoxPanel.HEIGHT+30);
 		Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation((int) ((screenSize.getWidth()-getWidth())/2),(int) ((screenSize.getHeight()-getHeight())/2));
 		setVisible(true);
@@ -61,4 +73,45 @@ public class MainFrame extends JFrame {
 		setJMenuBar(menubar);*/
 		validate();
 	}
+	public void makeMove(char dir) {
+		System.out.println(dir);
+		myMap.makeMove(dir);
+		myMap.printMat();
+		mPanel.repaint();
+	}
+	@Override
+	public void keyTyped(KeyEvent e) {}
+	
+	@Override
+	public void keyPressed(KeyEvent e) {
+		switch (e.getKeyCode()) {
+		case KeyEvent.VK_W:
+			makeMove('u');
+			break;
+		case KeyEvent.VK_UP:
+			makeMove('u');
+			break;
+		case KeyEvent.VK_A:
+			makeMove('l');
+			break;
+		case KeyEvent.VK_LEFT:
+			makeMove('l');
+			break;
+		case KeyEvent.VK_S:
+			makeMove('d');
+			break;
+		case KeyEvent.VK_DOWN:
+			makeMove('d');
+			break;
+		case KeyEvent.VK_D:
+			makeMove('r');
+			break;
+		case KeyEvent.VK_RIGHT:
+			makeMove('r');
+			break;
+		}
+
+	}
+	@Override
+	public void keyReleased(KeyEvent e) {}
 }
