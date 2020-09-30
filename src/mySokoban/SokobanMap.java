@@ -25,7 +25,6 @@ public class SokobanMap {
 			myMap.clear();
 			String dir=System.getProperty("user.dir");
 			dir=dir+"\\levels\\"+level+".l";
-			System.out.println(dir);
 			try {
 				Scanner input=new Scanner(new File(dir));
 				width=input.nextInt();
@@ -42,13 +41,18 @@ public class SokobanMap {
 						int t=input.nextInt();
 						for(int i=0;i<t;i++) {
 							setBoxAt(input.nextInt(), input.nextInt(), Box.numSquare);
-							System.out.println(t);
 						}
 						break;
 					case "Hole":
 						t=input.nextInt();
 						for(int i=0;i<t;i++) {
 							setBoxAt(input.nextInt(), input.nextInt(), Box.numHole);
+						}
+						break;
+					case "Wall":
+						t=input.nextInt();
+						for(int i=0;i<t;i++) {
+							setBoxAt(input.nextInt(), input.nextInt(), Box.numWall);
 						}
 						break;
 					}
@@ -157,6 +161,9 @@ public class SokobanMap {
 				break;
 			case Box.numHole:
 				b=new Hole(x, y);
+				break;
+			case Box.numWall:
+				b=new Wall(x, y);
 				break;
 		}
 		myMap.put(location(x,y), b);

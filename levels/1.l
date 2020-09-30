@@ -6,3 +6,7 @@ Door
 Square 2
 5 5 
 7 7
+Hole 1
+6 6
+Wall 1
+1 1

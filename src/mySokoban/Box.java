@@ -47,8 +47,6 @@ class Player extends Box{
 				xt++;
 				break;
 		}
-		System.out.println(sMap.width);
-		System.out.println(sMap.height);
 		if(xt<1||xt>sMap.width||yt<1||yt>sMap.height) {
 			return false;
 		}
