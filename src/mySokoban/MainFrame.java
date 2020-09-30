@@ -19,7 +19,7 @@ public class MainFrame extends JFrame implements KeyListener{
 		this.add(mPanel);
 		this.addKeyListener(this);
 		setTitle(s);
-		setSize(myMap.width*BoxPanel.WIDTH+16,myMap.height*BoxPanel.HEIGHT+39);
+		setSize(myMap.width*Box.WIDTH+16,myMap.height*Box.HEIGHT+39);
 		Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation((int) ((screenSize.getWidth()-getWidth())/2),(int) ((screenSize.getHeight()-getHeight())/2));
 		setVisible(true);

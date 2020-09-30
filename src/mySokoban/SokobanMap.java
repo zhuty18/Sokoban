@@ -16,12 +16,12 @@ public class SokobanMap {
 	public SokobanMap() {
 		myMap=new HashMap<>();
 		Box.sMap=this;
-		level=1;
+		level=0;
 		loadGame();
 	}
 	
 	private boolean loadGame() {
-		if(level<=LEVEL_MAX) {
+		if(level<LEVEL_MAX) {
 			myMap.clear();
 			String dir=System.getProperty("user.dir");
 			dir=dir+"\\levels\\"+level+".l";
@@ -89,7 +89,6 @@ public class SokobanMap {
 	
 	protected void moveBox(int x,int y,char dir) {
 		Box box=getBoxAt(x, y);
-		//BoxPanel bp=new BoxPanel(box);
 		switch(dir) {
 			case 'u':
 				box.y=box.y-1;
@@ -112,12 +111,9 @@ public class SokobanMap {
 				myMap.put(location(x+1, y),box);
 				break;
 		}
-		//Thread thread=new Thread(bp);
-		//thread.start();
 	}
 	
 	protected void movePlayer(char dir) {
-		//BoxPanel bp=new BoxPanel(player);
 		switch(dir) {
 			case 'u':
 				player.y=player.y-1;
@@ -132,8 +128,6 @@ public class SokobanMap {
 				player.x=player.x+1;
 				break;
 		}
-		//Thread thread=new Thread(bp);
-		//thread.start();
 	}
 	
 	protected void removeBox(int x,int y) {
@@ -188,13 +182,12 @@ public class SokobanMap {
 	}
 	
 	public void reload() {
-		if(level>LEVEL_MAX) {
-			level=1;
+		if(level>=LEVEL_MAX) {
+			level=0;
 			loadGame();
 		}
 		else {
 			loadGame();
 		}
-	}
-	
+	}	
 }

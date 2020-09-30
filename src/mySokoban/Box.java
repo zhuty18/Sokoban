@@ -8,6 +8,8 @@ public abstract class Box extends Thread {
 	static final int numWall=3;
 	static final int numHole=4;
 	static final int numFill=5;
+	static final int WIDTH=50;
+	static final int HEIGHT=WIDTH;
 	static SokobanMap sMap;
 	int x,y;
 	Box(int i,int j){
