@@ -8,8 +8,8 @@ import javax.swing.JPanel;
 
 public class BoxPanel extends JPanel implements Runnable {
 	private static final long serialVersionUID = 1L;
-	final static int WIDTH=30;
-	final static int HEIGHT=30;
+	final static int WIDTH=50;
+	final static int HEIGHT=WIDTH;
 	private Box box;
 	int x0,y0,xt,yt;
 	int x,y;

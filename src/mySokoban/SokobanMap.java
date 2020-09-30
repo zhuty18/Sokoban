@@ -1,30 +1,70 @@
 package mySokoban;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class SokobanMap {
 	int level;
 	int width;
 	int height;
+	static final int LEVEL_MAX=10;
 	HashMap<Integer, Box> myMap;
 	Box player;
 	
 	public SokobanMap() {
 		myMap=new HashMap<>();
 		Box.sMap=this;
-		level=0;
-		loadGame(level);
+		level=1;
+		loadGame();
 	}
 	
-	private boolean loadGame(int index) {
-		width=10;
-		height=10;
-		myMap.clear();
-		player=new Player(1, 1);
-		setBoxAt(10, 10, Box.numDoor);
-		setBoxAt(5, 5, Box.numSquare);
-		setBoxAt(5, 6, Box.numSquare);
-		return true;
+	private boolean loadGame() {
+		if(level<=LEVEL_MAX) {
+			myMap.clear();
+			String dir=System.getProperty("user.dir");
+			dir=dir+"\\levels\\"+level+".l";
+			System.out.println(dir);
+			try {
+				Scanner input=new Scanner(new File(dir));
+				width=input.nextInt();
+				height=input.nextInt();
+				for(String k=input.next();!k.equals("");k=input.next()) {
+					switch (k) {
+					case "Player":
+						player=new Player(input.nextInt(), input.nextInt());
+						break;
+					case "Door":
+						setBoxAt(input.nextInt(), input.nextInt(), Box.numDoor);
+						break;
+					case "Square":
+						int t=input.nextInt();
+						for(int i=0;i<t;i++) {
+							setBoxAt(input.nextInt(), input.nextInt(), Box.numSquare);
+							System.out.println(t);
+						}
+						break;
+					case "Hole":
+						t=input.nextInt();
+						for(int i=0;i<t;i++) {
+							setBoxAt(input.nextInt(), input.nextInt(), Box.numHole);
+						}
+						break;
+					}
+					if(!input.hasNext()) {
+						break;
+					}
+				}
+				return true;
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		else {
+			return true;
+		}
 	}
 	
 	public boolean makeMove(char dir) {
@@ -97,8 +137,9 @@ public class SokobanMap {
 	}
 	
 	protected void gameWin() {
-		System.out.println("Pass");
-		//TODO
+		System.out.println("Pass level "+level);
+		level++;
+		loadGame();
 	}
 	
 	private int location(int x,int y) {
@@ -113,6 +154,9 @@ public class SokobanMap {
 				break;
 			case Box.numSquare:
 				b=new Square(x, y);
+				break;
+			case Box.numHole:
+				b=new Hole(x, y);
 				break;
 		}
 		myMap.put(location(x,y), b);
@@ -135,4 +179,15 @@ public class SokobanMap {
 			System.out.print('\n');
 		}
 	}
+	
+	public void reload() {
+		if(level>LEVEL_MAX) {
+			level=1;
+			loadGame();
+		}
+		else {
+			loadGame();
+		}
+	}
+	
 }
