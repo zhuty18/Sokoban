@@ -24,7 +24,7 @@ public class SokobanMap {
 		if(level<LEVEL_MAX) {
 			myMap.clear();
 			String dir=System.getProperty("user.dir");
-			dir=dir+"\\levels\\"+level+".level";
+			dir=dir+"/levels/"+level+".level";
 			try {
 				Scanner input=new Scanner(new File(dir));
 				width=input.nextInt();
